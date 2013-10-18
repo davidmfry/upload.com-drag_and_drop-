@@ -1,0 +1,54 @@
+{%  extends "base.html" %}
+{% block content %}
+    <script>
+        // form data to JSON with javascript form validation
+        // form data to JSON with javascript form validation
+        /*$(document).ready(function(){
+            $('form').submit(function(event){
+                //formParams is a great plugin I found, makes the from to JSON very easy
+                event.preventDefault();
+                var form_package = $('form').formParams();                                               // The info that will be sent to the webserver in JSON format
+                var form_input_list = $('form').serializeArray();                                        // An array that holds all the object of the form
+                var json_data = {}
+                
+                // Simple Form Validation
+                for (var i = 0; i < form_input_list.length; i++)
+                {
+                    if (form_package[form_input_list[i]['name']] == "")
+                    {
+                        alert("Please fill out the " + form_input_list[i]['name'] + " field");
+                        break;
+                    }
+                    
+                    //creats the JSON object to send to the server
+                    var json_key = form_input_list[i]['name'];
+                    var json_value = form_package[form_input_list[i]['name']];
+                    json_data[json_key] = json_value;
+                }    
+                console.log(JSON.stringify(json_data));
+                // Post to server 
+                $.ajax({
+                    type: 'POST',
+                    url: '/posted/',
+                    data: JSON.stringify(json_data),
+                    dataType: 'json',
+                    error: function(server_data)
+                    {
+                        console.log("ERROR");
+                    },
+                })
+                //$('form').hide( "drop", { direction: "down" }, "slow" );
+                console.log(json_data);
+                return false;
+            });
+        });*/
+    </script>
+    
+    <h1>Upload</h1>
+    <form action='' method='POST'> <!--{% csrf_token %}!-->
+        {{ form.as_p }}
+        <input type='submit' value='submit'/>
+    </form>
+
+    
+{% endblock %}

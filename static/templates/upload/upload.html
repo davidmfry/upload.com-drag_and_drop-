@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	
+	<!-- Google web fonts -->
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
+        <link href= "{% static 'css/style.css' %}" rel="stylesheet"/>
+        
+    </head>
+    
+    <body>
+        <form id="upload" method="POST" action="upload-files/" enctype="multipart/form-data"> {% csrf_token %}
+            <div id="drop">
+                Drop Here
+
+                <a>Browse</a>
+                <input type="file" name="upl" multiple />
+            </div>
+
+            <ul>
+                <!-- The file uploads will be shown here -->
+            </ul>
+
+        </form>
+	
+	<!-- <h1>{{ form_data }}</h1> -->
+	
+        <!-- JavaScript Includes -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="{% static 'js/jquery.knob.js' %}"></script>
+        
+        <!-- jQuery File Upload Dependencies -->
+        <script src="{% static 'js/jquery.ui.widget.js' %}"></script>
+        <script src="{% static 'js/jquery.iframe-transport.js' %}"></script>
+        <script src="{% static 'js/jquery.fileupload.js' %}"></script>
+        
+	<!-- main JS file -->
+	<script src="{% static 'js/script.js' %}"></script>
+	
+    </body>
+    
+
+        
+    
+</html>

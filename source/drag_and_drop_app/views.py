@@ -1,5 +1,9 @@
-import os, sys
+import os, sys, shutil
+from tempfile import mkstemp
+import tempfile
 from django.shortcuts import render_to_response, RequestContext
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import UploadModel
 from .forms import UploadInfoForm
 
@@ -15,6 +19,14 @@ def make_dir(form_data):
         return dirname
     else:
         return dirname
+    
+def make_temp_file(tmp_file):
+    tmp_upload = tempfile.mkstemp()
+    new_file = os.fdopen(tmp_upload[0], 'w')
+    new_file.write(tmp_file.read())
+    new_file.close()
+    filepath = tmp_upload[1]
+    return filepath
 
     
 
@@ -42,3 +54,19 @@ def uploadform(request):
             new_upload_form.save()
         
     return render_to_response('upload/form.html', locals(), context_instance = RequestContext(request))
+
+def upload(request):
+    
+    return render_to_response('upload/upload.html', locals(), context_instance = RequestContext(request))
+
+def upload_files(request):
+    files = request.FILES['upl']
+    tmp_upload = tempfile.mkstemp()
+    new_file = os.fdopen(tmp_upload[0], 'w')
+    new_file.write(files.read())
+    new_file.close()
+    filepath = tmp_upload[1]
+    shutil.move(filepath, sys.path[0] + "/PROJECTS/")
+            
+    
+    return HttpResponse(filepath)

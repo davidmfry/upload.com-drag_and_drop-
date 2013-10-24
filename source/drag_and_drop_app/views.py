@@ -63,7 +63,8 @@ def upload_files(request):
     files = request.FILES['upl']                                    # gets the inmemory file
     # A function that makes the file in memory into a temp file 
     temp_file = make_temp_file(files)
-    shutil.move(temp_file, sys.path[0] + "/PROJECTS/" + files.name)
+    dst_dir = sys.path[0] + "/PROJECTS/" + files.name
+    shutil.move(temp_file, dst_dir)
             
     
-    return HttpResponse("Sucess!")
+    return HttpResponse("Success:  " + dst_dir)

@@ -23,11 +23,10 @@ def make_dir(form_data):
 def make_temp_file(tmp_file):
     tmp_upload = tempfile.mkstemp()
     new_file = os.fdopen(tmp_upload[0], 'w')
-    new_file.write(tmp_file.read())
+    new_file.write(tmp_file.read(512))
     new_file.close()
     filepath = tmp_upload[1]
     return filepath
-
     
 
 def uploadform(request):
@@ -60,13 +59,11 @@ def upload(request):
     return render_to_response('upload/upload.html', locals(), context_instance = RequestContext(request))
 
 def upload_files(request):
-    files = request.FILES['upl']
-    tmp_upload = tempfile.mkstemp()
-    new_file = os.fdopen(tmp_upload[0], 'w')
-    new_file.write(files.read())
-    new_file.close()
-    filepath = tmp_upload[1]
-    shutil.move(filepath, sys.path[0] + "/PROJECTS/")
+
+    files = request.FILES['upl']                                    # gets the inmemory file
+    # A function that makes the file in memory into a temp file 
+    temp_file = make_temp_file(files)
+    shutil.move(temp_file, sys.path[0] + "/PROJECTS/" + files.name)
             
     
-    return HttpResponse(filepath)
+    return HttpResponse("Sucess!")

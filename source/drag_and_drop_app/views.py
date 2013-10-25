@@ -1,6 +1,9 @@
 import os, sys, shutil
 from tempfile import mkstemp
 import tempfile
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+from django.conf import settings
 from django.shortcuts import render_to_response, RequestContext
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -62,9 +65,16 @@ def upload_files(request):
 
     files = request.FILES['upl']                                    # gets the inmemory file
     # A function that makes the file in memory into a temp file 
-    temp_file = make_temp_file(files)
-    dst_dir = sys.path[0] + "/PROJECTS/" + files.name
-    shutil.move(temp_file, dst_dir)
-            
-    
-    return HttpResponse("Success:  " + dst_dir)
+    #temp_file = make_temp_file(files)
+    dst_dir = sys.path[0] + "/PROJECTS/"
+    #shutil.move(files, dst_dir)
+    #with open(files, 'w') as uploaded_file:
+    #    uploaded_file.write(dst_dir + files.name)        
+    path = default_storage.save('PROJECTS/' + files.name, ContentFile(files.read()))
+    tmp_file = os.path.join(settings.MEDIA_ROOT, path)
+
+
+    return HttpResponse(str(tmp_file))
+
+
+    #'{0[parent_dir]}/PROJECTS/{1[file_name]}'.format({'parent_dir': sys.path[0], "file_name":files.name}

@@ -1,0 +1,443 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tmp",
+				"tmp_file"
+			],
+			[
+				"de",
+				"default_storage"
+			],
+			[
+				"c",
+				"core  (module)"
+			],
+			[
+				"default",
+				"default_storage  (variable)"
+			],
+			[
+				"uplo",
+				"uploaded_file"
+			],
+			[
+				"s",
+				"script"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"d",
+				"DOCTYPE  (doctype)"
+			],
+			[
+				"re",
+				"requestHandlers"
+			],
+			[
+				"content",
+				"Content-Type"
+			],
+			[
+				"post",
+				"postData"
+			],
+			[
+				"write",
+				"writeHead"
+			],
+			[
+				"requ",
+				"request"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"dj",
+				"dj_database_url"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "source/drag_and_drop_app/views.py",
+			"settings":
+			{
+				"buffer_size": 2896,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "source/upload/urls.py",
+			"settings":
+			{
+				"buffer_size": 1079,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read()) ",
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/david/Library/Application Support/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/drag_and_drop_v1/urls.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/draganddrop/views.py",
+		"/Volumes/MEDIA_HD/DAVID/TEST_SCRIPTS/test.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/static/templates/upload/home.html",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/static/templates/base.html",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/upload/upload.com/static/static/js/script.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/upload/upload.com/static/static/js/jquery.ui.widget.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/upload/upload.com/static/static/js/jquery.iframe-transport.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/upload/upload.com/static/static/js/jquery.fileupload.js",
+		"/Volumes/MEDIA_HD/DAVID/TEST_SCRIPTS/make_dir.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/upload/mini-upload-form/assets/js/jquery.fileupload.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/udemy_django_learning/Match_Making_Project/matchmaker.com/source/profiles/views.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/udemy_django_learning/Match_Making_Project/matchmaker.com/source/matchmaker/urls.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/udemy_django_learning/Match_Making_Project/matchmaker.com/source/matchmaker/settings/local_office.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/drag_and_drop_v1/settings.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/draganddrop/admin.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/draganddrop/forms.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/draganddrop/models.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/udemy_django_learning/Match_Making_Project/matchmaker.com/source/matchmaker/settings/__init__.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/udemy_django_learning/Match_Making_Project/matchmaker.com/source/matchmaker/settings/__init__.pyc",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/Lynda_Java_Script/simple_web_page/simple.html",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/Lynda_Java_Script/simple_web_page/script.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Apps_in_progress/Django_drag_and_drop/Django_Drag_and_Drop_v1/drag_and_drop_v1/JS Working with greg/json_object_js.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/Lab/form_testing/posted.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/Lab/form_testing/index.html",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Python/Udacity/p1_opt/p3_opt.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/angularJS/ng-newsletter/p1/index.html",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/angularJS/ng-newsletter/p1/js/main.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Python/DB Learning/database.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Python/DB Learning/database3.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/http-::blog.modulus.io:absolute-beginners-guide-to-nodejs/my_parse.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/http-::blog.modulus.io:absolute-beginners-guide-to-nodejs/my_static_file_server.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/http-::blog.modulus.io:absolute-beginners-guide-to-nodejs/example_log.txt",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/requestHandlers.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/router.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/server.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/index.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/requestHandler.js",
+		"/Volumes/MEDIA_HD/DAVID/Projects/JavaScript/node/node_beginner_org/helloworld.js",
+		"/Users/david/Library/Application Support/Sublime Text 3/Packages/SideBarEnhancements/CHANGELOG",
+		"/Applications/MAMP/htdocs/forms/index.html",
+		"/Applications/MAMP/htdocs/forms/posted.php",
+		"/Volumes/MEDIA_HD/DAVID/Projects/C /Learn_C_The_HARD_WAY/ex1/helloworld.c",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Django Apps/GSWD/gswd-vagrant/projects/microblog/microblog/settings/local.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Django Apps/GSWD/gswd-vagrant/projects/microblog/microblog/settings/__.init__.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Django Apps/GSWD/gswd-vagrant/projects/microblog/microblog/settings/base.py",
+		"/Volumes/MEDIA_HD/DAVID/Projects/Django Apps/GSWD/gswd-vagrant/projects/microblog/requirements.txt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "source/drag_and_drop_app/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								804,
+								804
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 217.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "source/upload/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": "uploading.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 362.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

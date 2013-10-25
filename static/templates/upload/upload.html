@@ -13,6 +13,14 @@
     </head>
     
     <body>
+        <div id="upload_form_div">
+            <h1>Upload</h1>
+            <form id="upload_form " action='' method='POST'> {% csrf_token %}
+                {{ form.as_p }}
+                <input type='submit' value='submit'/>
+           </form>         
+        </div>
+        
         <form id="upload" method="POST" action="upload-files/" enctype="multipart/form-data"> {% csrf_token %}
             <div id="drop">
                 Drop Here

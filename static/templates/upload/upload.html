@@ -13,13 +13,6 @@
     </head>
     
     <body>
-        <div id="upload_form_div">
-            <h1>Upload</h1>
-            <form id="upload_form " action='' method='POST'> {% csrf_token %}
-                {{ form.as_p }}
-                <input type='submit' value='submit'/>
-           </form>         
-        </div>
         
         <form id="upload" method="POST" action="upload-files/" enctype="multipart/form-data"> {% csrf_token %}
             <div id="drop">
@@ -39,12 +32,12 @@
 	
         <!-- JavaScript Includes -->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="{% static 'js/jquery.knob.js' %}"></script>
+        <script src="{% static 'js/lib/jquery/jquery.knob.js' %}"></script>
         
         <!-- jQuery File Upload Dependencies -->
-        <script src="{% static 'js/jquery.ui.widget.js' %}"></script>
-        <script src="{% static 'js/jquery.iframe-transport.js' %}"></script>
-        <script src="{% static 'js/jquery.fileupload.js' %}"></script>
+        <script src="{% static 'js/lib/jquery/jquery.ui.widget.js' %}"></script>
+        <script src="{% static 'js/lib/jquery/jquery.iframe-transport.js' %}"></script>
+        <script src="{% static 'js/lib/jquery/jquery.fileupload.js' %}"></script>
         
 	<!-- main JS file -->
 	<script src="{% static 'js/script.js' %}"></script>

@@ -1,9 +1,44 @@
 {%  extends "base.html" %}
-{% block content %}
+{% load widget_tweaks %}
 
-    <h1>Upload</h1>
-    <form action={% url 'upload' %} method='POST'> {% csrf_token %}
-        {{ form.as_p }}
-        <input type='submit' value='submit'/>
+{% comment %}
+	{% url 'upload' %}
+{% endcomment %}
+
+{% block content %}
+	<div class="container">
+	    <h1>Upload</h1>
+	    <form role="form" method='POST' action="" > {% csrf_token %}
+	       	<div class="form-group">
+    			<label>First Name</label>
+    			{{form.first_name|add_class:"form-control"}}
+    		</div>
+
+    		<div class="form-group">
+    			<label>Last Name</label>
+    			{{form.last_name|add_class:"form-control"}}
+    		</div>
+
+
+	        <div class="form-group">
+    			<label>Email address</label>
+    			{{form.email|add_class:"form-control"}}
+    		</div>
+
+			<div class="form-group">
+    			<label>Phone Number</label>
+    			{{form.phone|add_class:"form-control"}}
+    		</div>
+
+    		<div class="form-group">
+    			<label>Message</label>
+    			{{form.message|add_class:"form-control"|attr:"row=2"}}
+    		</div>
+
+
+    		<input type='submit' class="btn btn-default" name='submit' value='submit'/>
+    	</form>
+
+    </div>
     
 {% endblock %}

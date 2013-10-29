@@ -37,6 +37,7 @@ def make_temp_file(tmp_file):
     
 
 def uploadform(request):
+    
     form = UploadInfoForm(request.POST)
     
     if form.is_valid():
@@ -44,21 +45,27 @@ def uploadform(request):
         form_data = form.cleaned_data
         
         # Directory created
-        make_dir(form_data)
+        #UploadModel.objects.update(dirname=make_dir(form_data))
+        #UploadModel.dirname = make_dir(form_data)
         
         # Database Create and Update
         # Checks if the form and model/database first name and last name matach, if it does it updates the recored with new info
         if UploadModel.objects.filter(first_name__contains=form_data['first_name']).filter(last_name__contains=form_data['last_name']):
             
-            UploadModel.objects.all().update(
+            db_field = UploadModel.objects.filter(first_name__contains=form_data['first_name']).filter(last_name__contains=form_data['last_name'])
+            
+            db_field.update(
                 email=form_data['email'],
                 phone=form_data['phone'],
                 message=form_data['message'])
+            return HttpResponseRedirect("/upload")
         else:
             # creats a new record in the database from the user input on the form
             new_upload_form = form.save(commit=False or None)
+            new_upload_form.dirname = make_dir(form_data)
             new_upload_form.save()
-        
+            return HttpResponseRedirect("/upload")
+      
     return render(request, 'upload/form.html', locals())
 
 def upload(request): 
@@ -69,8 +76,8 @@ def upload_files(request):
     files = request.FILES['upl']                                    # gets the inmemory file
     # A function that makes the file in memory into a temp file 
     temp_file = make_temp_file(files)
-    dest_dir = sys.path[0] + "/PROJECTS/" + files.name
-    #dest_dir = FORM_CREATED_USER_PATH
+    #dest_dir = sys.path[0] + "/PROJECTS/" + files.name
+    dest_dir = str(UploadModel.objects.latest('timestamp').dirname) + files.name
     shutil.move(temp_file, dest_dir)
  
     #path = default_storage.save('PROJECTS/' + files.name, ContentFile(files.read()))
@@ -82,3 +89,8 @@ def upload_files(request):
 
 
     #'{0[parent_dir]}/PROJECTS/{1[file_name]}'.format({'parent_dir': sys.path[0], "file_name":files.name}
+
+
+def master(request):
+    db = UploadModel.objects.all()
+    return render(request, 'upload/master.html', {"db": db})

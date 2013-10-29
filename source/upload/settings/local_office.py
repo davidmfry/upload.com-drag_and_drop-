@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'shell_plus',
     'django_extensions',
+    'widget_tweaks',
     'drag_and_drop_app',
 
 )

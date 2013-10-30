@@ -1,9 +1,48 @@
-{%  extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+    	<!-- <meta http-equiv="refresh" content="5" />    -->
+    	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+            
+	
+	<!-- Google web fonts -->
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel='stylesheet' />
 
-{% block content %}
-	<ul>
-	{% for item in db %}
-		<li> {{ item }}</li>
-	{% endfor%}
-	<ul>
-{% endblock %}
+
+    </head>
+    
+    <body>
+
+    	<div id="accordion">
+    		{% for item in db %}
+    		<h3>{{ item }}</h3>
+				<div>
+					<p>{{ item.message }}</p>
+				</div>
+			{% endfor %}	
+    	</div>
+
+	   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+       <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+       <script src="http://v3.javascriptmvc.com/jquery/dist/jquery.formparams.js"></script>   
+
+       <script src="{% static 'js/lib/bootstrap/bootstrap.min.js' %}"></script>
+
+       <script>
+       		$(document).ready(function(){
+       			$("#accordion").accordion({
+       				collapsible: true,
+       				active: false
+       			});
+
+     	});			
+ 			//
+
+      </script>
+
+    </body>
+    
+</html>

@@ -7,8 +7,9 @@
 
 {% block content %}
 	<div class="container">
-	    <h1>Upload</h1>
-	    <form role="form" method='POST' action="" > {% csrf_token %}
+
+	    <form class="form-signin" method='POST' action="" > {% csrf_token %}
+            <h2 class="form-signin-heading">Upload</h2>
 	       	<div class="form-group">
     			<label>First Name</label>
     			{{form.first_name|add_class:"form-control"}}

@@ -15,16 +15,20 @@
     </head>
     
     <body>
-
+    <div class="container">
+    	
+   
     	<div id="accordion">
     		{% for item in db %}
-    		<h3>{{ item }}</h3>
+    		<h3>{{ item }}  {{ item.id }}</h3>
 				<div>
 					<p>{{ item.message }}</p>
 				</div>
 			{% endfor %}	
     	</div>
+     </div>
 
+     <h1>{{ site_path }}</h1>
 	   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
        <script src="http://v3.javascriptmvc.com/jquery/dist/jquery.formparams.js"></script>   
@@ -37,9 +41,9 @@
        				collapsible: true,
        				active: false
        			});
-
-     	});			
- 			//
+     	});
+     	
+     				
 
       </script>
 

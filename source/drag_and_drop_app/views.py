@@ -3,6 +3,7 @@ from tempfile import mkstemp
 import tempfile
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.shortcuts import render_to_response, RequestContext, render
 from django.http import HttpResponse
@@ -34,7 +35,10 @@ def make_temp_file(tmp_file):
     new_file.close()
     filepath = tmp_upload[1]
     return filepath
-    
+
+def split_url(the_url):
+    split_list = the_url.split('/')
+    return split_list
 
 def uploadform(request):
     
@@ -57,27 +61,33 @@ def uploadform(request):
             db_field.update(
                 email=form_data['email'],
                 phone=form_data['phone'],
-                message=form_data['message'])
-            return HttpResponseRedirect("/upload")
+                message=form_data['message'],
+                dirname=make_dir(form_data))
+
+            url = reverse('upload', kwargs={'user_id': db_field[0].id})
+            return HttpResponseRedirect(url)
         else:
             # creats a new record in the database from the user input on the form
             new_upload_form = form.save(commit=False or None)
             new_upload_form.dirname = make_dir(form_data)
             new_upload_form.save()
-            return HttpResponseRedirect("/upload")
+            url = reverse('upload', kwargs={'user_id': new_upload_form.id})
+            return HttpResponseRedirect(url)
       
     return render(request, 'upload/form.html', locals())
 
-def upload(request): 
+def upload(request, user_id):
+
     return render(request, 'upload/upload.html', locals())
 
-def upload_files(request):
+def upload_files(request, user_id):
 
     files = request.FILES['upl']                                    # gets the inmemory file
+    url_id = split_url(str(request.path))
     # A function that makes the file in memory into a temp file 
     temp_file = make_temp_file(files)
     #dest_dir = sys.path[0] + "/PROJECTS/" + files.name
-    dest_dir = str(UploadModel.objects.latest('timestamp').dirname) + files.name
+    dest_dir = str(UploadModel.objects.get(id=url_id[2]).dirname) + files.name
     shutil.move(temp_file, dest_dir)
  
     #path = default_storage.save('PROJECTS/' + files.name, ContentFile(files.read()))
@@ -85,7 +95,7 @@ def upload_files(request):
 
 
 
-    return HttpResponse(sys.path[0] + "/PROJECTS/")
+    return HttpResponse(UploadModel.objects.get(id=url_id[2]).dirname)
 
 
     #'{0[parent_dir]}/PROJECTS/{1[file_name]}'.format({'parent_dir': sys.path[0], "file_name":files.name}
@@ -93,4 +103,31 @@ def upload_files(request):
 
 def master(request):
     db = UploadModel.objects.all()
-    return render(request, 'upload/master.html', {"db": db})
+    site_path = str(request.path)[1:7]
+    return render(request, 'upload/master.html', {"db": db, "site_path":site_path})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

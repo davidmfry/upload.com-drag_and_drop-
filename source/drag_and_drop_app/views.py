@@ -11,6 +11,8 @@ from django.http import HttpResponseRedirect
 from .models import UploadModel
 from .forms import UploadInfoForm, MasterResponseForm
 
+import mandrill
+
 #Global Variables
 
 FORM_CREATED_USER_PATH = ''
@@ -35,6 +37,27 @@ def make_temp_file(tmp_file):
     new_file.close()
     filepath = tmp_upload[1]
     return filepath
+
+def send_email(api_key, from_name, from_email, to_email, to_name, subject, message ):
+    try:
+        # You need an account with mandrill to get your api key
+        mandrill_client = mandrill.Mandrill(api_key)
+        
+        # Creating the email message
+        message = { 'from_name' : from_name,
+                    'from_email': 'message.' + from_email,
+                    'to':[{ 'email': to_email,
+                            'name' : to_name,
+                            }],
+                    'subject': subject,
+                    'text': message,
+                     }
+        result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool')
+    except mandrill.Error, e:
+        # Mandrill errors are thrown as exceptions
+        print 'A mandrill error occurred: %s - %s' % (e.__class__, e)
+        # A mandrill error occurred: <class 'mandrill.UnknownSubaccountError'> - No subaccount exists with the id 'customer-123'    
+        raise
 
 def split_url(the_url):
     split_list = the_url.split('/')
@@ -63,6 +86,7 @@ def uploadform(request):
                 phone=form_data['phone'],
                 message=form_data['message'],
                 dirname=make_dir(form_data),
+                checked_by='',
                 has_been_checked=False)
 
             url = reverse('upload', kwargs={'user_id': db_field[0].id})
@@ -110,26 +134,40 @@ def master(request):
     db = UploadModel.objects
     form = MasterResponseForm(request.POST)
     site_path = str(request.path)[1:7]
+    the_request = request
     
-    return render(request, 'upload/master.html', {"db": db.all(), "site_path":site_path, "form": form})
+    return render(request, 'upload/master.html', {"db": db.all(), "site_path":site_path, "form": form, "the_request":the_request })
 
 def master_checked(request):
     
-    db = UploadModel.objects
-    #if request.is_ajax():
-    db.filter(id=request.POST["id"]).update(has_been_checked=True)
-        #form = MasterResponseForm(request.POST)
-        #client_id = db.get(id=request.POST["id"]).has_been_checked
-        
-        
-        #if form.is_valid():
-            #form_data = form.cleaned_data
-            #db.get(id=request.POST["id"]).update(has_been_checked=True)
-            #form.has_been_checked = True
-            #form.save(commit=False or None)
-    url = reverse('master')
-    return HttpResponseRedirect(url)
+    default_replay_message = "This is just a test!"
 
+    db = UploadModel.objects
+    form = MasterResponseForm(request.POST)
+    data = request.POST
+    
+    mandrill_api_key = '-gwymhejJEt5AK57eX3hEA'
+    from_name = 'Upload Web App'
+    from_email = 'upload_web_app@uploadtest.com'
+    subject = 'Testing replay_message from form'
+    
+    client_name = db.get(id=request.POST["id"]).first_name, db.get(id=request.POST["id"]).last_name
+    client_email = db.get(id=request.POST["id"]).email
+
+    # default message is sent if nothing is inputed in the message field
+    if data["replay_message"] == '':
+        send_email(mandrill_api_key, from_name, from_email, client_email, client_name, subject, default_replay_message )
+        return HttpResponse("The message is empty: Default message sent")
+    else:
+        send_email(mandrill_api_key, from_name, from_email, client_email, client_name, subject, data["replay_message"] )
+
+
+    db.filter(id=request.POST["id"]).update(checked_by=request.POST["checked_by"])
+    db.filter(id=request.POST["id"]).update(has_been_checked=True)
+)
+    url = reverse('master')
+    #return HttpResponseRedirect(url)
+    return HttpResponse(request.POST["checked_by"])
 
 
 

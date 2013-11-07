@@ -9,4 +9,5 @@ class UploadInfoForm(forms.ModelForm):
 class MasterResponseForm(forms.Form):
 
 	user_id = forms.IntegerField()
-	replay_message = forms.CharField(max_length=250)
+	checked_by = forms.CharField(max_length=250)
+	replay_message = forms.CharField(widget = forms.Textarea)

@@ -8,6 +8,7 @@ class UploadModel(models.Model):
     message = models.TextField()
     file_name = models.CharField(max_length = 500)
     dirname = models.CharField(max_length = 500)
+    checked_by = models.CharField(max_length= 200)
     has_been_checked = models.BooleanField()
     timestamp = models.DateTimeField(auto_now_add = True, auto_now = False)
     

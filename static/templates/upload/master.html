@@ -1,8 +1,9 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
     <head>
-    	<meta http-equiv="refresh" content="15" />
+    	<!-- <meta http-equiv="refresh" content="15" /> -->
     	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
@@ -23,10 +24,13 @@
     			{% if item.has_been_checked != True %}
 	    		<h3>{{ item }}  {{ item.id }}</h3>
 					<div>
+						<h3>Client instructions:</h3>
 						<p>{{ item.message }}</p>
-						<form class="form-signin"  name="form-{{ item.id }}" method='POST' action="master-checked/" > {% csrf_token %}
-
-							{{ form.replay_message}}
+						<form class="form-inline" role="form"  name="form-{{ item.id }}" method='POST' action="master-checked/"> {% csrf_token %}
+							<label class="control-label" for="textinput"> Checked by: </label>
+							{{ form.checked_by|add_class:"form-control"|attr:"placeholder:enter your name"}}<br>
+							<label class="control-label" for="textinput"> Replay message: </label>
+							{{ form.replay_message|add_class:"form-control"|attr:"placeholder:enter a message for the client"}}<br>
 							<input type="hidden" name="id" value="{{ item.id }}"/>
 							<input type='submit' class="btn btn-default" name='submit' value='submit'/>
 						</form>
@@ -35,6 +39,7 @@
 				{% endif %}
 			{% endfor %}	
     	</div>
+    	{{ the_request }}
      </div>
      <h1>{{ client_id }}</h1>
 	   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>

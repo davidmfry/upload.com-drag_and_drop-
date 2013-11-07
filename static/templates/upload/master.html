@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<!-- <meta http-equiv="refresh" content="5" />    -->
+    	<meta http-equiv="refresh" content="15" />
     	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
@@ -20,15 +20,23 @@
    
     	<div id="accordion">
     		{% for item in db %}
-    		<h3>{{ item }}  {{ item.id }}</h3>
-				<div>
-					<p>{{ item.message }}</p>
-				</div>
+    			{% if item.has_been_checked != True %}
+	    		<h3>{{ item }}  {{ item.id }}</h3>
+					<div>
+						<p>{{ item.message }}</p>
+						<form class="form-signin"  name="form-{{ item.id }}" method='POST' action="master-checked/" > {% csrf_token %}
+
+							{{ form.replay_message}}
+							<input type="hidden" name="id" value="{{ item.id }}"/>
+							<input type='submit' class="btn btn-default" name='submit' value='submit'/>
+						</form>
+
+					</div>
+				{% endif %}
 			{% endfor %}	
     	</div>
      </div>
-
-     <h1>{{ site_path }}</h1>
+     <h1>{{ client_id }}</h1>
 	   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
        <script src="http://v3.javascriptmvc.com/jquery/dist/jquery.formparams.js"></script>   
@@ -41,6 +49,18 @@
        				collapsible: true,
        				active: false
        			});
+       			
+       			/*$('.form-signin').submit(function(){
+       				$.ajax({
+       					data: $(this).serialize(),
+       					type: $(this).attr('POST'),
+       					url: $(this).attr('/master-checked/')
+       				});
+       				console.log("Done");
+       			});
+
+       			//return false
+				*/
      	});
      	
      				

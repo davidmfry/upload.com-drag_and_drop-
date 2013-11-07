@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     #url(r'^upload/$', 'drag_and_drop_app.views.upload', name='upload'),
     url(r'^upload/(?P<user_id>\d+)/upload-files/$', 'drag_and_drop_app.views.upload_files', name='upload_files'),
     url(r'^master/$', 'drag_and_drop_app.views.master', name='master'),
+    url(r'^master/master-checked/$', 'drag_and_drop_app.views.master_checked', name='master_checked'),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

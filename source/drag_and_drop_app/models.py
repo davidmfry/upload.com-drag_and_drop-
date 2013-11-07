@@ -6,7 +6,9 @@ class UploadModel(models.Model):
     email = models.EmailField(max_length = 250)
     phone = models.CharField(max_length = 250)
     message = models.TextField()
-    dirname = models.CharField(max_length = 250)
+    file_name = models.CharField(max_length = 500)
+    dirname = models.CharField(max_length = 500)
+    has_been_checked = models.BooleanField()
     timestamp = models.DateTimeField(auto_now_add = True, auto_now = False)
     
     def __unicode__(self):

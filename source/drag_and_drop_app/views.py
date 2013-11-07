@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response, RequestContext, render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .models import UploadModel
-from .forms import UploadInfoForm
+from .forms import UploadInfoForm, MasterResponseForm
 
 #Global Variables
 
@@ -62,7 +62,8 @@ def uploadform(request):
                 email=form_data['email'],
                 phone=form_data['phone'],
                 message=form_data['message'],
-                dirname=make_dir(form_data))
+                dirname=make_dir(form_data),
+                has_been_checked=False)
 
             url = reverse('upload', kwargs={'user_id': db_field[0].id})
             return HttpResponseRedirect(url)
@@ -70,6 +71,7 @@ def uploadform(request):
             # creats a new record in the database from the user input on the form
             new_upload_form = form.save(commit=False or None)
             new_upload_form.dirname = make_dir(form_data)
+            new_upload_form.has_been_checked = False
             new_upload_form.save()
             url = reverse('upload', kwargs={'user_id': new_upload_form.id})
             return HttpResponseRedirect(url)
@@ -84,6 +86,8 @@ def upload_files(request, user_id):
 
     files = request.FILES['upl']                                    # gets the inmemory file
     url_id = split_url(str(request.path))
+    #for item in files:
+    #    UploadModel.objects.filter(id__contains=url_id[2]).update(file_name=files.name)
     # A function that makes the file in memory into a temp file 
     temp_file = make_temp_file(files)
     #dest_dir = sys.path[0] + "/PROJECTS/" + files.name
@@ -101,11 +105,30 @@ def upload_files(request, user_id):
     #'{0[parent_dir]}/PROJECTS/{1[file_name]}'.format({'parent_dir': sys.path[0], "file_name":files.name}
 
 
-def master(request):
-    db = UploadModel.objects.all()
-    site_path = str(request.path)[1:7]
-    return render(request, 'upload/master.html', {"db": db, "site_path":site_path})
 
+def master(request):
+    db = UploadModel.objects
+    form = MasterResponseForm(request.POST)
+    site_path = str(request.path)[1:7]
+    
+    return render(request, 'upload/master.html', {"db": db.all(), "site_path":site_path, "form": form})
+
+def master_checked(request):
+    
+    db = UploadModel.objects
+    #if request.is_ajax():
+    db.filter(id=request.POST["id"]).update(has_been_checked=True)
+        #form = MasterResponseForm(request.POST)
+        #client_id = db.get(id=request.POST["id"]).has_been_checked
+        
+        
+        #if form.is_valid():
+            #form_data = form.cleaned_data
+            #db.get(id=request.POST["id"]).update(has_been_checked=True)
+            #form.has_been_checked = True
+            #form.save(commit=False or None)
+    url = reverse('master')
+    return HttpResponseRedirect(url)
 
 
 

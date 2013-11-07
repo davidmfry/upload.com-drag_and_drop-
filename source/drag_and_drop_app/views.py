@@ -1,16 +1,21 @@
+# python imports
 import os, sys, shutil
-from tempfile import mkstemp
 import tempfile
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from django.core.urlresolvers import reverse
-from django.conf import settings
-from django.shortcuts import render_to_response, RequestContext, render
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from .models import UploadModel
-from .forms import UploadInfoForm, MasterResponseForm
 
+from tempfile                   import mkstemp
+
+# Django imports
+from django.core.files.storage  import default_storage
+from django.core.files.base     import ContentFile
+from django.core.urlresolvers   import reverse
+from django.conf                import settings
+from django.shortcuts           import render_to_response, RequestContext, render
+from django.http                import HttpResponse
+from django.http                import HttpResponseRedirect
+from .models                    import UploadModel
+from .forms                     import UploadInfoForm, MasterResponseForm
+
+# third party imports
 import mandrill
 
 #Global Variables
@@ -31,11 +36,13 @@ def make_dir(form_data):
         return dirname
     
 def make_temp_file(tmp_file):
-    tmp_upload = tempfile.mkstemp()
-    new_file = os.fdopen(tmp_upload[0], 'w')
+    tmp_upload  = tempfile.mkstemp()
+    new_file    = os.fdopen(tmp_upload[0], 'w')
+    
     new_file.write(tmp_file.read())
     new_file.close()
-    filepath = tmp_upload[1]
+    
+    filepath    = tmp_upload[1]
     return filepath
 
 def send_email(api_key, from_name, from_email, to_email, to_name, subject, message ):
@@ -148,7 +155,7 @@ def master_checked(request):
     
     mandrill_api_key = '-gwymhejJEt5AK57eX3hEA'
     from_name = 'Upload Web App'
-    from_email = 'upload_web_app@uploadtest.com'
+    from_email = 'david.fry.tv@gmail.com'
     subject = 'Testing replay_message from form'
     
     client_name = db.get(id=request.POST["id"]).first_name, db.get(id=request.POST["id"]).last_name
@@ -157,17 +164,17 @@ def master_checked(request):
     # default message is sent if nothing is inputed in the message field
     if data["replay_message"] == '':
         send_email(mandrill_api_key, from_name, from_email, client_email, client_name, subject, default_replay_message )
-        return HttpResponse("The message is empty: Default message sent")
+        #return HttpResponse("The message is empty: Default message sent")
     else:
         send_email(mandrill_api_key, from_name, from_email, client_email, client_name, subject, data["replay_message"] )
 
 
     db.filter(id=request.POST["id"]).update(checked_by=request.POST["checked_by"])
     db.filter(id=request.POST["id"]).update(has_been_checked=True)
-)
+
     url = reverse('master')
-    #return HttpResponseRedirect(url)
-    return HttpResponse(request.POST["checked_by"])
+    return HttpResponseRedirect(url)
+    #return HttpResponse(request.POST["checked_by"])
 
 
 

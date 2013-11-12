@@ -25,7 +25,8 @@ FORM_CREATED_USER_PATH = ''
 # creats a directory structure base on the give from data
 def make_dir(form_data):
     #creates the directory path from the from data
-    dirname = sys.path[0] + "/PROJECTS/" + form_data['first_name'] + "_" + form_data['last_name'] + "/"
+    home_path = sys.path[0]
+    dirname = home_path[0:-6] + "static/" + "static/" "media/" + "PROJECTS/" + form_data['first_name'] + "_" + form_data['last_name'] + "/"
     
     # check if the directory exisits, it not it creats it.
     
@@ -114,40 +115,30 @@ def upload(request, user_id):
     return render(request, 'upload/upload.html', locals())
 
 def upload_files(request, user_id):
-
+    file_names = []
     files = request.FILES['upl']                                    # gets the inmemory file
+
     url_id = split_url(str(request.path))
-    #for item in files:
-    #    UploadModel.objects.filter(id__contains=url_id[2]).update(file_name=files.name)
-    # A function that makes the file in memory into a temp file 
     temp_file = make_temp_file(files)
-    #dest_dir = sys.path[0] + "/PROJECTS/" + files.name
     dest_dir = str(UploadModel.objects.get(id=url_id[2]).dirname) + files.name
     shutil.move(temp_file, dest_dir)
- 
-    #path = default_storage.save('PROJECTS/' + files.name, ContentFile(files.read()))
-    #tmp_file = os.path.join(settings.MEDIA_ROOT, path)
 
-
-
+    UploadModel.objects.filter(id__contains=url_id[2]).update(file_name=files.name)
+    
     return HttpResponse(UploadModel.objects.get(id=url_id[2]).dirname)
-
-
-    #'{0[parent_dir]}/PROJECTS/{1[file_name]}'.format({'parent_dir': sys.path[0], "file_name":files.name}
-
-
 
 def master(request):
     db = UploadModel.objects
     form = MasterResponseForm(request.POST)
     site_path = str(request.path)[1:7]
     the_request = request
+    sys_path = sys.path[0]
     
-    return render(request, 'upload/master.html', {"db": db.all(), "site_path":site_path, "form": form, "the_request":the_request })
+    return render(request, 'upload/master.html', {"db": db.all(), "sys_path":sys_path[0:-6], "site_path":site_path, "form": form, "the_request":the_request })
 
 def master_checked(request):
     
-    default_replay_message = "This is just a test!"
+    
 
     db = UploadModel.objects
     form = MasterResponseForm(request.POST)
@@ -160,6 +151,8 @@ def master_checked(request):
     
     client_name = db.get(id=request.POST["id"]).first_name, db.get(id=request.POST["id"]).last_name
     client_email = db.get(id=request.POST["id"]).email
+
+    default_replay_message = "This is just a test!"
 
     # default message is sent if nothing is inputed in the message field
     if data["replay_message"] == '':

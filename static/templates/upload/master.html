@@ -26,6 +26,12 @@
 					<div>
 						<h3>Client instructions:</h3>
 						<p>{{ item.message }}</p>
+						<h4>File name: {{ item.file_name}} </h4> 
+						<div id="video">
+							<video width="480" height="270" controls>
+								<source src="{% static 'media/PROJECTS/' %}{{ item.first_name}}_{{ item.last_name}}/{{ item.file_name}} "
+							</video>
+						</div>
 						<form class="form-inline" role="form"  name="form-{{ item.id }}" method='POST' action="master-checked/"> {% csrf_token %}
 							<label class="control-label" for="textinput"> Checked by: </label>
 							{{ form.checked_by|add_class:"form-control"|attr:"placeholder:enter your name"}}<br>
@@ -40,7 +46,7 @@
 			{% endfor %}	
     	</div>
      </div>
-     <h1>{{ client_id }}</h1>
+     <h1></h1>
 	   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
        <script src="http://v3.javascriptmvc.com/jquery/dist/jquery.formparams.js"></script>   

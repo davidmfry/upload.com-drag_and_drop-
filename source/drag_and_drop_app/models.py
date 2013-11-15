@@ -13,4 +13,11 @@ class UploadModel(models.Model):
     timestamp = models.DateTimeField(auto_now_add = True, auto_now = False)
     
     def __unicode__(self):
-        return self.first_name + ", " + self.last_name + "| " + self.email
+        return self.first_name + ", " + self.last_name + " | " + self.email
+
+class FileNameModel(models.Model):
+	user = models.ForeignKey(UploadModel)
+	file_name = file_name = models.CharField(max_length = 500)
+
+	def __unicode__(self):
+		return str(self.user) + ': ' + self.file_name

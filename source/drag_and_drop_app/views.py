@@ -12,7 +12,7 @@ from django.conf                import settings
 from django.shortcuts           import render_to_response, RequestContext, render
 from django.http                import HttpResponse
 from django.http                import HttpResponseRedirect
-from .models                    import UploadModel
+from .models                    import UploadModel, FileNameModel
 from .forms                     import UploadInfoForm, MasterResponseForm
 
 # third party imports
@@ -119,22 +119,28 @@ def upload_files(request, user_id):
     files = request.FILES['upl']                                    # gets the inmemory file
 
     url_id = split_url(str(request.path))
+    user = UploadModel.objects.get(id=url_id[2])
     temp_file = make_temp_file(files)
     dest_dir = str(UploadModel.objects.get(id=url_id[2]).dirname) + files.name
     shutil.move(temp_file, dest_dir)
 
-    UploadModel.objects.filter(id__contains=url_id[2]).update(file_name=files.name)
-    
+    #UploadModel.objects.filter(id__contains=url_id[2]).update(file_name=files.name)
+    new_file = FileNameModel()
+    new_file.user = user
+    new_file.file_name = files.name
+    new_file.save()
+
     return HttpResponse(UploadModel.objects.get(id=url_id[2]).dirname)
 
 def master(request):
     db = UploadModel.objects
+    files = FileNameModel.objects
     form = MasterResponseForm(request.POST)
     site_path = str(request.path)[1:7]
     the_request = request
     sys_path = sys.path[0]
     
-    return render(request, 'upload/master.html', {"db": db.all(), "sys_path":sys_path[0:-6], "site_path":site_path, "form": form, "the_request":the_request })
+    return render(request, 'upload/master.html', { "files":files.all(), "db": db.all(), "sys_path":sys_path[0:-6], "site_path":site_path, "form": form, "the_request":the_request })
 
 def master_checked(request):
     
